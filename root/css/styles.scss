@@ -7,11 +7,11 @@ html {
 }
 
 h1 {
-    font-size: 2.25rem;
+    font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     word-wrap: break-word;
 }
 
@@ -56,6 +56,8 @@ p {
     margin-bottom: 1rem;
     table {
         width: 90%;
+        max-width: 500px;
+        background-color: #cccccc;
     }
     
     td {
@@ -67,42 +69,65 @@ p {
     }
 }
 
+.dashboard-section {
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+}
+
 
 .dashboard {
-    margin-left: 5%;
-    margin-right: 5%;
-   
-    padding: 0;
     display: grid;
-    grid-template-columns: 47.5% 5% 47.5%;
-    
+    grid-template-columns: repeat(21, 1fr);
+    grid-template-rows: repeat(3, minmax(32px, auto));
+    gap: 1rem;
+
+    p {
+        font-size: 0.8rem;
+    }
 
     .widget {
-        background-color: lightgrey;
-        width: 100;
-        height: 100%
+        background-color: #cccccc;
+        min-height: 3rem;
+        word-wrap: break-word;
+        p {
+            margin: 1rem 1rem;
+        }
     }
-}
 
-.controls {
-    margin-left: 5%;
-    margin-right: 5%;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
+    #timer {
+        grid-column: 1 / 11;
+        grid-row: 1 / 2;
+    }
+
+    #word-left {
+        grid-column: 12 / 22;
+        grid-row: 1 / 2;
+    }
+
     .button {
-        width: 100;
-        height: 100%;
         text-align: center;
-        margin-bottom: 1rem;
+        min-height: 3rem;
+        p {
+            margin: 1rem 1rem;
+        }
     }
-}
 
-.enter-word {
-    background-color: lightsalmon;
-}
+    #enter-word {
+        grid-column: 1 / 22;
+        grid-row: 2 / 3;
+        background-color: #E8BF83;
+    }
 
-.new-game {
-    background-color: lightslategrey;
+    #start-new {
+        grid-column: 1 / 22;
+        grid-row: 3 / 4;
+        background-color: #454545;
+        p {
+            color: #C8C8C8;
+        }
+    }
+
+    
 }
 
