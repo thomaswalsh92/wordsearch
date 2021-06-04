@@ -30,3 +30,21 @@ function createWords (arr) {
     return result
 }
 
+function createBoard (boardSize) {
+    let result = {
+        rows: []
+    }
+    for (i = 0; i < boardSize; i++) {
+        result.rows.push([])
+    }
+    for (j = 0; j < boardSize; j++) {
+        let thisRow = result.rows[j]
+        for (k = 0; k < boardSize; k++) { 
+            thisRow.push(k)
+        }
+    }
+    return result
+}
+
+console.log(createWords(wordNames))
+console.log(createBoard(10))
