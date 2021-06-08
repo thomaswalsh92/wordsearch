@@ -27,8 +27,7 @@ let Word = class {
 }
 
 
-
-// takes an array and creates 
+// takes an array and creates word objects from them
 function createWords (arr) {
     let result = []
     for (let e in arr) {
@@ -37,6 +36,7 @@ function createWords (arr) {
     return result
 }
 
+// builds a board based on the boardSize global var
 function createBoard () {
     let result = {
         rows: []
@@ -53,13 +53,14 @@ function createBoard () {
     return result
 }
 
+//used to find a random co-ordinate on the board
 function randomBoardSquare () {
     let x = Math.floor(Math.random() * boardSize)
     let y = Math.floor(Math.random() * boardSize)
     return {x: x, y: y}
 }
 
-
+//returns true if a word clears the boards edge
 function clearBoardEdges (word) {
     switch(word.direction) {
         case 'ttb':    
@@ -91,17 +92,25 @@ function clearBoardEdges (word) {
     }
 }
 
+function checkWordConflict (word) {
+    
+}
 
+// if both clear board edge and no word conflict functions eval as true, then function
+// can 'write' the word to the board state. 
 
-
+// if eval as false, function needs to re randomise position and try again. 
 function placeWord (wordsArr) { 
-    for (word in wordsArr) {
-        wordsArr[word].startPos = randomBoardSquare(boardSize)
-        // checks for board edges next
-        // then checks for conflicts with other words and slides if poss/
-        // if a false is received for either above, the function calls recursively
-        // and tries again to place the word. 
-
+    for (i = 0; i < wordsArr.length; i++) {
+        let thisWord = wordsArr[word]
+        thisWord.startPos = randomBoardSquare(boardSize)
+        if (clearBoardEdges(thisWord))  {
+            if (noWordConflict(thisWord)) {
+                //write to board state here
+            }
+            // check and slide function would happen here
+        }
+        // randomise position would happen here
     }
 }
 
