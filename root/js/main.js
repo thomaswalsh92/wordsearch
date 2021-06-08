@@ -1,7 +1,14 @@
+//global vars -->
+
+let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'strawberry'];
+let boardSize = 10;
+
+
 let Word = class {
     constructor (word) {
         this.direction = Word.getDirection();
         this.word = word
+        this.startPos = {x: null, y: null}
     }
 
     static getDirection () {
@@ -19,7 +26,7 @@ let Word = class {
     }
 }
 
-let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'strawberry']
+
 
 // takes an array and creates 
 function createWords (arr) {
@@ -46,5 +53,50 @@ function createBoard (boardSize) {
     return result
 }
 
-console.log(createWords(wordNames))
-console.log(createBoard(10))
+function randomBoardSquare (boardSize) {
+    let x = Math.floor(Math.random() * boardSize)
+    let y = Math.floor(Math.random() * boardSize)
+    return {x: x, y: y}
+}
+
+function directionHelper (word) {
+    switch(word.directionHelper) {
+        case 'ttb':
+    
+        break;
+        case 'rtl':
+
+        break;
+        case 'btt':
+
+        break;
+        case 'ltr':
+
+        break;
+        default:
+    // code block
+}
+    
+}
+function clearBoardEdges (word, startPos) {
+    let dir = directionHelper(word)
+
+}
+
+
+function placeWord (wordsArr, boardSize) { 
+    for (word in wordsArr) {
+        wordsArr[word].startPos = randomBoardSquare(boardSize)
+        // checks for board edges next
+        // then checks for conflicts with other words and slides if poss/
+        // if a false is received for either above, the function calls recursively
+        // and tries again to place the word. 
+
+    }
+}
+
+let words = createWords(wordNames)
+console.log(placeWord(words, 10))
+
+
+
