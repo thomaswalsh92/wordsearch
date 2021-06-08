@@ -6,12 +6,12 @@ let boardSize = 10;
 
 let Word = class {
     constructor (word) {
-        this.direction = Word.getDirection();
-        this.word = word
+        this.direction = Word.randomDirection();
+        this.text = word
         this.startPos = {x: null, y: null}
     }
 
-    static getDirection () {
+    static randomDirection () {
         let value = Math.floor(Math.random()*4)
         switch(value) {
             case 0:
@@ -37,7 +37,7 @@ function createWords (arr) {
     return result
 }
 
-function createBoard (boardSize) {
+function createBoard () {
     let result = {
         rows: []
     }
@@ -53,38 +53,48 @@ function createBoard (boardSize) {
     return result
 }
 
-function randomBoardSquare (boardSize) {
+function randomBoardSquare () {
     let x = Math.floor(Math.random() * boardSize)
     let y = Math.floor(Math.random() * boardSize)
     return {x: x, y: y}
 }
 
-function directionHelper (word) {
-    switch(word.directionHelper) {
-        case 'ttb':
-    
-        break;
+
+function clearBoardEdges (word) {
+    switch(word.direction) {
+        case 'ttb':    
+            if (((word.startPos.y + 1) + word.text.length) >= boardSize) {
+                return true
+            } else {
+                return false
+            }
         case 'rtl':
-
-        break;
+            if (((word.startPos.x + 1) + word.text.length) >= boardSize) {
+                return true
+            } else {
+                return false
+            }
         case 'btt':
-
-        break;
+            if (((word.startPos.y + 1) + word.text.length) < boardSize) {
+                return true
+            } else {
+                return false
+            }
         case 'ltr':
-
-        break;
+            if (((word.startPos.y + 1) + word.text.length) < boardSize) {
+                return true
+            } else {
+                return false
+            }
         default:
-    // code block
-}
-    
-}
-function clearBoardEdges (word, startPos) {
-    let dir = directionHelper(word)
-
+            throw new Error ('There was an issue with clearBoardEdges')
+    }
 }
 
 
-function placeWord (wordsArr, boardSize) { 
+
+
+function placeWord (wordsArr) { 
     for (word in wordsArr) {
         wordsArr[word].startPos = randomBoardSquare(boardSize)
         // checks for board edges next
@@ -96,7 +106,8 @@ function placeWord (wordsArr, boardSize) {
 }
 
 let words = createWords(wordNames)
-console.log(placeWord(words, 10))
-
-
-
+placeWord(words, boardSize)
+let testWord = words[0]
+createBoard()
+console.log (testWord)
+console.log (clearBoardEdges (testWord, boardSize))
