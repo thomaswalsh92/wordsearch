@@ -1,7 +1,7 @@
 //global vars -->
 
-let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'strawberry'];
-// DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE
+let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
+// ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE !
 let boardSize = 10;
 
 
@@ -9,7 +9,7 @@ let Word = class {
     constructor (word) {
         this.direction = Word.randomDirection();
         this.text = word
-        this.startPos = {x: null, y: null}
+        this.startPos = randomBoardSquare();
     }
 
     static randomDirection () {
@@ -33,116 +33,47 @@ let BoardState = class {
             this.board = this.initBoard()
         }
 
-        if (action === 'moveWord') {
-            this.board = params.state()
-            this.board
+        if (action === 'placeWord') {
+            this.board = this.placeWord(params)
         }
     }
+
     initBoard () {
-        return {
-        x0: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x1: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x2: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x3: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-        },
-        x4: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x5: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x6: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x7: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined
-            },
-        x8: {y0: undefined,
-            y1: undefined,
-            y2: undefined,
-            y3: undefined,
-            y4: undefined,
-            y5: undefined,
-            y6: undefined,
-            y7: undefined,
-            y8: undefined,
-            }
+        return [
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null]
+        ]
+    }
+
+    placeWord (params) {
+        this.board = params.state
+        let word = params.word
+        console.log ('the word being placed is: ' + word)
+        while (clearBoardEdges(word) === false) {
+            word = new Word (word.text)
         }
-    } 
+        let startPosX = word.startPos.x
+        let startPos = startPosX[word.startPos.y]
+        this.board[startPos] = word.text[0]
+
+    }
 }
-    
-    // village state class needs to keep track of the changing state of the 
+    // board state class needs to keep track of the changing state of the 
     //board. 
 
     // first it will need to be initialised to a blank grid according to the boardsize
     //variable. This will be made from a nested object. 
 
     //Then, it will need to generate new BoardStates as new words are added and moved to 
-    // accomodate each other. 
-}
+    //accomodate each other. 
 
 // takes an array and creates word objects from them
 function createWords (arr) {
@@ -153,8 +84,15 @@ function createWords (arr) {
     return result
 }
 
-// builds a board based on the boardSize global var
+function addWords (state, words) {
+    for (let word in words) {
+        let newBoard = new BoardState ('placeWord', {word: words[word], state: state})
+        state = newBoard
+    }
+    return state
+}
 
+//UTILITY FUNCTIONS > 
 
 //used to find a random co-ordinate on the board
 function randomBoardSquare () {
@@ -195,30 +133,28 @@ function clearBoardEdges (word) {
     }
 }
 
-function checkWordConflict (word) {
-    
-}
-
-// if both clear board edge and no word conflict functions eval as true, then function
-// can 'write' the word to the board state. 
-
-// if eval as false, function needs to re randomise position and try again. 
-function placeWord (wordsArr) { 
-    for (i = 0; i < wordsArr.length; i++) {
-        let thisWord = wordsArr[i]
-        thisWord.startPos = randomBoardSquare(boardSize)
-        if (clearBoardEdges(thisWord))  {
-            console.log ()
-        }
+//when provided a word, this returns an object which provides
+//the amount to change co-ordinates by per iteration.
+function getPrintDirection (word) {
+    switch(word.direction) {
+        case 'ttb': 
+        return {x: 0, y: -1}   
+        case 'rtl': 
+        return {x: -1, y: 0}   
+        case 'btt':
+        return {x: 0, y: 1}   
+        case 'ltr':
+        return {x: 1, y: 0}     
+        default:
+        throw new Error ('There was an issue with getPrintDirection')
     }
 }
 
+
+
+// RUN --> this will need to be a function that can be triggered
+// after async action when API is integrated.
 let words = createWords(wordNames)
-placeWord(words, boardSize)
-let testWord = words[0]
-console.log (testWord)
-console.log (clearBoardEdges (testWord, boardSize))
+let init = new BoardState('init')
 
-
-let gameBoard = new BoardState('init')
-console.log (gameBoard.board.x4.y4)
+console.log (addWords(init, words))
