@@ -1,6 +1,7 @@
 //global vars -->
 
 let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'strawberry'];
+// DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE
 let boardSize = 10;
 
 
@@ -26,6 +27,122 @@ let Word = class {
     }
 }
 
+let BoardState = class {
+    constructor (action, params) {
+        if (action === 'init') {
+            this.board = this.initBoard()
+        }
+
+        if (action === 'moveWord') {
+            this.board = params.state()
+            this.board
+        }
+    }
+    initBoard () {
+        return {
+        x0: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x1: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x2: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x3: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+        },
+        x4: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x5: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x6: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x7: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined
+            },
+        x8: {y0: undefined,
+            y1: undefined,
+            y2: undefined,
+            y3: undefined,
+            y4: undefined,
+            y5: undefined,
+            y6: undefined,
+            y7: undefined,
+            y8: undefined,
+            }
+        }
+    } 
+}
+    
+    // village state class needs to keep track of the changing state of the 
+    //board. 
+
+    // first it will need to be initialised to a blank grid according to the boardsize
+    //variable. This will be made from a nested object. 
+
+    //Then, it will need to generate new BoardStates as new words are added and moved to 
+    // accomodate each other. 
+}
 
 // takes an array and creates word objects from them
 function createWords (arr) {
@@ -37,21 +154,7 @@ function createWords (arr) {
 }
 
 // builds a board based on the boardSize global var
-function createBoard () {
-    let result = {
-        rows: []
-    }
-    for (i = 0; i < boardSize; i++) {
-        result.rows.push([])
-    }
-    for (j = 0; j < boardSize; j++) {
-        let thisRow = result.rows[j]
-        for (k = 0; k < boardSize; k++) { 
-            thisRow.push(k)
-        }
-    }
-    return result
-}
+
 
 //used to find a random co-ordinate on the board
 function randomBoardSquare () {
@@ -102,21 +205,20 @@ function checkWordConflict (word) {
 // if eval as false, function needs to re randomise position and try again. 
 function placeWord (wordsArr) { 
     for (i = 0; i < wordsArr.length; i++) {
-        let thisWord = wordsArr[word]
+        let thisWord = wordsArr[i]
         thisWord.startPos = randomBoardSquare(boardSize)
         if (clearBoardEdges(thisWord))  {
-            if (noWordConflict(thisWord)) {
-                //write to board state here
-            }
-            // check and slide function would happen here
+            console.log ()
         }
-        // randomise position would happen here
     }
 }
 
 let words = createWords(wordNames)
 placeWord(words, boardSize)
 let testWord = words[0]
-createBoard()
 console.log (testWord)
 console.log (clearBoardEdges (testWord, boardSize))
+
+
+let gameBoard = new BoardState('init')
+console.log (gameBoard.board.x4.y4)
