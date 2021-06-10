@@ -57,6 +57,8 @@ let BoardState = class {
     //place word can succesfully create a new board, but needs refactoring to 
     //allow it to create words succesfully and check against previous versions.
 
+
+
     placeWord (params) {
         let board = params.state.board
         console.log ('in PW, the start state is: ' + board)
@@ -87,8 +89,15 @@ let BoardState = class {
     
 function createWords (arr) {
     let result = []
-    for (let e in arr) {
-        result.push (new Word (arr[e]))
+    for (let i = 0; i < arr.length; i++) {
+        let thisWord = new Word(arr[i])
+        if (!clearBoardEdges(thisWord)) {
+            console.log (`arr${i} failed: trying again`)
+            i --
+        } else if (clearBoardEdges(thisWord)) {
+            result.push(thisWord)
+            console.log (`arr${i} passed, pushed to array`)
+        } 
     }
     return result
 }
@@ -116,25 +125,25 @@ function randomBoardSquare () {
 function clearBoardEdges (word) {
     switch(word.direction) {
         case 'ttb':    
-            if (((word.startPos.y + 1) + word.text.length) >= boardSize) {
+            if (word.text.length <= word.startPos.y + 1) {
                 return true
             } else {
                 return false
             }
         case 'rtl':
-            if (((word.startPos.x + 1) + word.text.length) >= boardSize) {
+            if (word.text.length <= word.startPos.x + 1) {
                 return true
             } else {
                 return false
             }
         case 'btt':
-            if (((word.startPos.y + 1) + word.text.length) < boardSize) {
+            if ((word.startPos.y + 1 + word.text.length) <= boardSize) {
                 return true
             } else {
                 return false
             }
         case 'ltr':
-            if (((word.startPos.y + 1) + word.text.length) < boardSize) {
+            if ((word.startPos.x + 1 + word.text.length) <= boardSize) {
                 return true
             } else {
                 return false
