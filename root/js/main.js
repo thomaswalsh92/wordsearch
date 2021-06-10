@@ -1,10 +1,11 @@
-//global vars -->
+//GLOBAL VARS
 
 let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
 // ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE !
 let boardSize = 10;
 
 
+//CLASS CONSTRUCTORS 
 let Word = class {
     constructor (word) {
         this.direction = Word.randomDirection();
@@ -53,17 +54,22 @@ let BoardState = class {
         ]
     }
 
-    placeWord (params) {
-        this.board = params.state
-        let word = params.word
-        console.log ('the word being placed is: ' + word)
-        while (clearBoardEdges(word) === false) {
-            word = new Word (word.text)
-        }
-        let startPosX = word.startPos.x
-        let startPos = startPosX[word.startPos.y]
-        this.board[startPos] = word.text[0]
+    //place word can succesfully create a new board, but needs refactoring to 
+    //allow it to create words succesfully and check against previous versions.
 
+    placeWord (params) {
+        let board = params.state.board
+        console.log ('in PW, the start state is: ' + board)
+        let words = params.words
+        let firstWord = params.words[0].text
+        console.log ('the words are: ' + words)
+        console.log ('the first word is: ' + firstWord)
+        for (let i = 0; i < words.length; i++) {
+            for (let j = 0; j < words[i].text.length; j++) {
+                board[i][j] = words[i].text[j]
+            }
+        }
+        console.log (board)
     }
 }
     // board state class needs to keep track of the changing state of the 
@@ -75,7 +81,10 @@ let BoardState = class {
     //Then, it will need to generate new BoardStates as new words are added and moved to 
     //accomodate each other. 
 
-// takes an array and creates word objects from them
+//MAIN FUNCTIONS
+
+    // uses an array to create a set of words.
+    
 function createWords (arr) {
     let result = []
     for (let e in arr) {
@@ -85,13 +94,15 @@ function createWords (arr) {
 }
 
 function addWords (state, words) {
-    for (let word in words) {
-        let newBoard = new BoardState ('placeWord', {word: words[word], state: state})
-        state = newBoard
-    }
-    return state
+    let newBoard = new BoardState ('placeWord', {state: state, words: words})
 }
 
+function createNewState (state) {
+    for (i = 0; i < 10; i++) {
+    let newBoard = new BoardState ('createNewState', {state: state, iterator: i})
+
+    }
+}
 //UTILITY FUNCTIONS > 
 
 //used to find a random co-ordinate on the board
@@ -151,10 +162,10 @@ function getPrintDirection (word) {
 }
 
 
-
 // RUN --> this will need to be a function that can be triggered
 // after async action when API is integrated.
 let words = createWords(wordNames)
+console.log (words)
 let init = new BoardState('init')
-
-console.log (addWords(init, words))
+addWords(init, words)
+createNewState(init)

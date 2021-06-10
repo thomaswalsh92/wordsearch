@@ -14,7 +14,7 @@ function createBoard () {
     return result
 }
 
-function placeWord (wordsArr) { 
+function placeWordmethod (wordsArr) { 
     for (let i = 0; i < wordsArr.length; i++) {
         let thisWord = wordsArr[i]
         thisWord.startPos = randomBoardSquare(boardSize)
@@ -23,6 +23,18 @@ function placeWord (wordsArr) {
         }
     }
 }
+
+function placeWordmethod (params) {
+    this.board = params.state
+    let word = params.word
+    while (clearBoardEdges(word) === false) {
+        word = new Word (word.text)
+    }
+    let startPosX = word.startPos.x
+    let startPos = startPosX[word.startPos.y]
+    this.board[startPos] = word.text[0]
+}
+
 
 // object based initBoard -->
 function initBoard () {
