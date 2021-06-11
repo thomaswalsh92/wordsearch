@@ -77,11 +77,18 @@ p {
   background-color: #cccccc;
 }
 
-.word-board-section td {
-  text-align: center;
+.word-board-section .word-board-container {
+  width: 90%;
+  max-width: 500px;
+  background-color: #cccccc;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[10];
+      grid-template-columns: repeat(10, 1fr);
 }
 
-.word-board-section td p {
+.word-board-section .word-board-container p {
+  text-align: center;
   font-size: 1rem;
   margin: 0.5rem;
 }

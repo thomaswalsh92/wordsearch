@@ -59,10 +59,15 @@ p {
         max-width: 500px;
         background-color: #cccccc;
     }
-    
-    td {
-        text-align: center;
+
+    .word-board-container {
+        width: 90%;
+        max-width: 500px;
+        background-color: #cccccc;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
         p {
+            text-align: center;
             font-size: 1rem;
             margin: 0.5rem;
         }
