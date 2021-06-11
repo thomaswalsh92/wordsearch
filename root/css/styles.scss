@@ -66,10 +66,19 @@ p {
         background-color: #cccccc;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
+
+        .x {
+            width: 2rem;
+        }
+
+        .y {
+            height: 2rem;
+        }
+
         p {
             text-align: center;
             font-size: 1rem;
-            margin: 0.5rem;
+            margin: 1rem;
         }
     }
 }

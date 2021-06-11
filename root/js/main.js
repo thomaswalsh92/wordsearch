@@ -11,7 +11,7 @@ let boardSize = 10;
 let Word = class {
     constructor (word) {
         this.direction = Word.randomDirection();
-        this.text = word
+        this.text = word.toUpperCase();
         this.startPos = randomBoardSquare();
     }
 
@@ -104,12 +104,19 @@ function addWords (state, words) {
 }
 
 function printStateToDom (state) {
-    console.log ('pstd state is: ', state.board[0])
-    let domBoard = document.getElementsByClassName("word-board")
-    console.log (domBoard)
-    for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
-            
+    console.log ("pstd state is: ", state.board[0])
+    let board = document.getElementsByClassName("word-board-container")
+    console.log (board)
+    for (let i = 0; i < boardSize; i++) {
+        let x = board[0].children[i]
+        console.dir (x)
+        for (let j = boardSize - 1; j >= 0; j--) {
+            let y = x.children[j]
+            if (state.board[i][j] == null) {
+                console.log ()
+                y.innerText = randomLetter()
+            } 
+            y.innerText = state.board[i][j]
         }
     }
 }
@@ -122,6 +129,14 @@ function randomBoardSquare () {
     let y = Math.floor(Math.random() * boardSize)
     return {x: x, y: y}
 }
+
+function randomLetter () {
+    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    let num = Math.floor(Math.random() * chars.length)
+    let choice = chars[num]
+    return choice
+}
+
 
     //returns true if a word clears the boards edge
 function clearBoardEdges (word) {
@@ -174,10 +189,12 @@ function getPrintDirection (word) {
 }
 
 
+
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 let words = createWords(wordNames)
-//console.log (words)
+console.log (words)
 let init = new BoardState('init')
 let wordsAdded = addWords(init, words)
+console.log (randomLetter())
 printStateToDom (wordsAdded)
