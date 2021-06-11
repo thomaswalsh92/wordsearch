@@ -60,7 +60,7 @@ p {
   margin: 0;
 }
 
-.word-grid-section {
+.word-board-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -71,17 +71,17 @@ p {
   margin-bottom: 1rem;
 }
 
-.word-grid-section table {
+.word-board-section table {
   width: 90%;
   max-width: 500px;
   background-color: #cccccc;
 }
 
-.word-grid-section td {
+.word-board-section td {
   text-align: center;
 }
 
-.word-grid-section td p {
+.word-board-section td p {
   font-size: 1rem;
   margin: 0.5rem;
 }

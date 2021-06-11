@@ -2,7 +2,8 @@
 
 let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
 // ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE ! 
-// ! Will be refactored later ! // 
+// ! Will be refactored later ! 
+// ! UI also needs to be redesigned to account for anything other than a 10 x 10 grid ! 
 let boardSize = 10;
 
 
@@ -70,13 +71,12 @@ let BoardState = class {
             let coOrd = thisWord.startPos
             let printDir = getPrintDirection(thisWord)
             for (let j = 0; j < thisWord.text.length; j++) {
-                console.log ('j loop')
                 board[coOrd.x][coOrd.y] = thisWord.text[j]
                 coOrd.x = coOrd.x + printDir.x
                 coOrd.y = coOrd.y + printDir.y
             }
         }
-        console.log (board)
+        return board
     }
 }
     
@@ -90,11 +90,9 @@ function createWords (arr) {
     for (let i = 0; i < arr.length; i++) {
         let thisWord = new Word(arr[i])
         if (!clearBoardEdges(thisWord)) {
-            console.log (`arr${i} failed: trying again`)
             i --
         } else if (clearBoardEdges(thisWord)) {
             result.push(thisWord)
-            console.log (`arr${i} passed, pushed to array`)
         } 
     }
     return result
@@ -102,14 +100,20 @@ function createWords (arr) {
     // adds a words object created in createWords to create a new board state
 function addWords (state, words) {
     let newBoard = new BoardState ('placeWords', {state: state, words: words})
+    return newBoard
 }
 
-function createNewState (state) {
-    for (i = 0; i < 10; i++) {
-    let newBoard = new BoardState ('createNewState', {state: state, iterator: i})
-
+function printStateToDom (state) {
+    console.log ('pstd state is: ', state.board[0])
+    let domBoard = document.getElementsByClassName("word-board")
+    console.log (domBoard)
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            
+        }
     }
 }
+
 //UTILITY FUNCTIONS > 
 
     //used to find a random co-ordinate on the board
@@ -173,7 +177,7 @@ function getPrintDirection (word) {
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 let words = createWords(wordNames)
-console.log (words)
+//console.log (words)
 let init = new BoardState('init')
-addWords(init, words)
-createNewState(init)
+let wordsAdded = addWords(init, words)
+printStateToDom (wordsAdded)
