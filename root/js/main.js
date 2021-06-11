@@ -47,7 +47,19 @@ let BoardState = class {
         // Init board method can now place random letters instead of spaces
         // by uncommenting below line. 
     initBoard () {
-        let board = []
+        return [
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null]
+        ]
+        /* let board = []
         for (let i = 0; i < boardSize; i++) {
             board.push([])
             for (let j = 0; j < boardSize; j++) {
@@ -55,7 +67,7 @@ let BoardState = class {
                 board[i].push (' ')
             }
         }
-        return board
+        return board */
     }
 
   
@@ -106,11 +118,12 @@ function printStateToDom (state) {
     let board = document.getElementsByClassName("word-board-container")
     for (let i = 0; i < boardSize; i++) {
         let x = board[0].children[i]
-        for (let j = boardSize - 1; j >= 0; j--) {
+        for (let j = 0; j < boardSize; j++) {
+            let revCount = boardSize - (j + 1)
             let y = x.children[j]
-            let thisLetter = state.board[i][j]
-            console.log (thisLetter)
+            let thisLetter = state.board[i][revCount]
             y.innerText = thisLetter
+            //y.innerText = (i + ',' + revCount)
         }
     }
 }
@@ -189,5 +202,9 @@ function getPrintDirection (word) {
 let words = createWords(wordNames)
 console.log (words)
 let init = new BoardState('init')
+console.log (init)
 let wordsAdded = addWords(init, words)
 printStateToDom (wordsAdded)
+
+let chicken = new Word ("chicken")
+console.log (chicken.startPos)
