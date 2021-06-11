@@ -1,7 +1,8 @@
 //GLOBAL VARS
 
 let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
-// ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE !
+// ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE ! 
+// ! Will be refactored later ! // 
 let boardSize = 10;
 
 
@@ -28,14 +29,17 @@ let Word = class {
     }
 }
 
+    // BoardState class and associated methods are used only to generate new states board state objects. 
+    // Checking should be done by functions with the assumption that BoardState constructor always handed
+    // valid data. 
 let BoardState = class {
     constructor (action, params) {
         if (action === 'init') {
             this.board = this.initBoard()
         }
 
-        if (action === 'placeWord') {
-            this.board = this.placeWord(params)
+        if (action === 'placeWords') {
+            this.board = this.placeWords(params)
         }
     }
 
@@ -54,39 +58,33 @@ let BoardState = class {
         ]
     }
 
-    //place word can succesfully create a new board, but needs refactoring to 
-    //allow it to create words succesfully and check against previous versions.
-
-
-
-    placeWord (params) {
+  
+        // placeWord can now place words in the words object based on their randomly generated
+        // start position and direction. One draw back of the method at the moment is that when
+        // it encouters a word conflict it will overwrite words. 
+    placeWords (params) {
         let board = params.state.board
-        console.log ('in PW, the start state is: ' + board)
         let words = params.words
-        let firstWord = params.words[0].text
-        console.log ('the words are: ' + words)
-        console.log ('the first word is: ' + firstWord)
         for (let i = 0; i < words.length; i++) {
-            for (let j = 0; j < words[i].text.length; j++) {
-                board[i][j] = words[i].text[j]
+            let thisWord = words[i]    
+            let coOrd = thisWord.startPos
+            let printDir = getPrintDirection(thisWord)
+            for (let j = 0; j < thisWord.text.length; j++) {
+                console.log ('j loop')
+                board[coOrd.x][coOrd.y] = thisWord.text[j]
+                coOrd.x = coOrd.x + printDir.x
+                coOrd.y = coOrd.y + printDir.y
             }
         }
         console.log (board)
     }
 }
-    // board state class needs to keep track of the changing state of the 
-    //board. 
+    
 
-    // first it will need to be initialised to a blank grid according to the boardsize
-    //variable. This will be made from a nested object. 
 
-    //Then, it will need to generate new BoardStates as new words are added and moved to 
-    //accomodate each other. 
-
-//MAIN FUNCTIONS
+//MAIN FUNCTIONS - these are used for general program actions e.g. creating /processing word data. 
 
     // uses an array to create a set of words.
-    
 function createWords (arr) {
     let result = []
     for (let i = 0; i < arr.length; i++) {
@@ -100,10 +98,10 @@ function createWords (arr) {
         } 
     }
     return result
-}
-
+} 
+    // adds a words object created in createWords to create a new board state
 function addWords (state, words) {
-    let newBoard = new BoardState ('placeWord', {state: state, words: words})
+    let newBoard = new BoardState ('placeWords', {state: state, words: words})
 }
 
 function createNewState (state) {
@@ -114,14 +112,14 @@ function createNewState (state) {
 }
 //UTILITY FUNCTIONS > 
 
-//used to find a random co-ordinate on the board
+    //used to find a random co-ordinate on the board
 function randomBoardSquare () {
     let x = Math.floor(Math.random() * boardSize)
     let y = Math.floor(Math.random() * boardSize)
     return {x: x, y: y}
 }
 
-//returns true if a word clears the boards edge
+    //returns true if a word clears the boards edge
 function clearBoardEdges (word) {
     switch(word.direction) {
         case 'ttb':    
@@ -153,8 +151,9 @@ function clearBoardEdges (word) {
     }
 }
 
-//when provided a word, this returns an object which provides
-//the amount to change co-ordinates by per iteration.
+    //when provided a word, this returns an object which provides
+    //the amount to change co-ordinates by per iteration to allow printing
+    //onto the board.
 function getPrintDirection (word) {
     switch(word.direction) {
         case 'ttb': 
@@ -171,8 +170,8 @@ function getPrintDirection (word) {
 }
 
 
-// RUN --> this will need to be a function that can be triggered
-// after async action when API is integrated.
+    // RUN --> this will need to be a function that can be triggered
+    // after async action when API is integrated.
 let words = createWords(wordNames)
 console.log (words)
 let init = new BoardState('init')
