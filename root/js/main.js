@@ -44,19 +44,18 @@ let BoardState = class {
         }
     }
 
+        // Init board method can now place random letters instead of spaces
+        // by uncommenting below line. 
     initBoard () {
-        return [
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null]
-        ]
+        let board = []
+        for (let i = 0; i < boardSize; i++) {
+            board.push([])
+            for (let j = 0; j < boardSize; j++) {
+                //board[i].push(randomLetter())
+                board[i].push (' ')
+            }
+        }
+        return board
     }
 
   
@@ -104,19 +103,14 @@ function addWords (state, words) {
 }
 
 function printStateToDom (state) {
-    console.log ("pstd state is: ", state.board[0])
     let board = document.getElementsByClassName("word-board-container")
-    console.log (board)
     for (let i = 0; i < boardSize; i++) {
         let x = board[0].children[i]
-        console.dir (x)
         for (let j = boardSize - 1; j >= 0; j--) {
             let y = x.children[j]
-            if (state.board[i][j] == null) {
-                console.log ()
-                y.innerText = randomLetter()
-            } 
-            y.innerText = state.board[i][j]
+            let thisLetter = state.board[i][j]
+            console.log (thisLetter)
+            y.innerText = thisLetter
         }
     }
 }
@@ -196,5 +190,4 @@ let words = createWords(wordNames)
 console.log (words)
 let init = new BoardState('init')
 let wordsAdded = addWords(init, words)
-console.log (randomLetter())
 printStateToDom (wordsAdded)
