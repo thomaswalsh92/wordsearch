@@ -58,31 +58,20 @@ let BoardState = class {
         return board 
     }
 
-  
-        // placeWord can now place words in the words object based on their randomly generated
-        // start position and direction. One draw back of the method at the moment is that when
-        // it encouters a word conflict it will overwrite words.
-        
-        // the issue is that words are starting at their end point
-        // somehow they are printing backwards?? 
-        // also the word is starting at one Y position higher
-        // than it should be. Needs to be resolved. 
-
-        // the entire code may be refactored to run
-        // --> X 
-        //  ||
-        //  ||
-        //  \/  Y
-
-
     placeWords (params) {
         let board = params.state.board
         let words = params.words
+        //console.log (`1: words is:`, words[0], words[1], words[2], words[3], words[4])
         for (let i = 0; i < words.length; i++) {
+            //console.log (`2: the word start pos is: ${words[i].startPos.x}, ${words[i].startPos.y}`)
             let thisWord = words[i]    
-            let coOrd = thisWord.startPos
+            let startPos = thisWord.startPos
+            let coOrd = {x: startPos.x, y: startPos.y}
+             //console.log (`3: the coOrd var is ${coOrd.x}, ${coOrd.y} `)
+             //console.log (`3: the word start pos is: ${thisWord.startPos.x}, ${thisWord.startPos.y}`)
             let printDir = getPrintDirection(thisWord)
             for (let j = 0; j < thisWord.text.length; j++) {
+                //console.log (`printing word: ${thisWord.text}, letter: ${thisWord.text[j]} at co-ords: ${coOrd.x}, ${coOrd.y} (direction is ${thisWord.direction})`)
                 board[coOrd.x][coOrd.y] = thisWord.text[j]
                 coOrd.x = coOrd.x + printDir.x
                 coOrd.y = coOrd.y + printDir.y
@@ -200,11 +189,8 @@ function getPrintDirection (word) {
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 let words = createWords(wordNames)
-console.log (words)
+console.log ('inital value of words is: ', words)
 let init = new BoardState('init')
-console.log (init)
 let wordsAdded = addWords(init, words)
 printStateToDom (wordsAdded)
 
-let chicken = new Word ("chicken")
-console.log (chicken.startPos)

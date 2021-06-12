@@ -19,7 +19,7 @@ function placeWordmethod (wordsArr) {
         let thisWord = wordsArr[i]
         thisWord.startPos = randomBoardSquare(boardSize)
         if (clearBoardEdges(thisWord))  {
-            console.log ()
+
         }
     }
 }
