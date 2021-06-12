@@ -122,7 +122,7 @@ function printStateToDom (state) {
         for (let j = 0; j < boardSize; j++) {
             let revCount = boardSize - (j + 1)
             let y = x.children[j]
-            let thisLetter = state.board[i][revCount]
+            let thisLetter = state.board[i][j]
             y.innerText = thisLetter
         }
     }
@@ -149,7 +149,7 @@ function randomLetter () {
 function clearBoardEdges (word) {
     switch(word.direction) {
         case 'ttb':    
-            if (word.text.length <= word.startPos.y + 1) {
+            if ((word.startPos.y + 1 + word.text.length) <= boardSize) {
                 return true
             } else {
                 return false
@@ -161,7 +161,7 @@ function clearBoardEdges (word) {
                 return false
             }
         case 'btt':
-            if ((word.startPos.y + 1 + word.text.length) <= boardSize) {
+            if (word.text.length <= word.startPos.y + 1) {
                 return true
             } else {
                 return false
@@ -183,11 +183,11 @@ function clearBoardEdges (word) {
 function getPrintDirection (word) {
     switch(word.direction) {
         case 'ttb': 
-        return {x: 0, y: -1}   
+        return {x: 0, y: 1}   
         case 'rtl': 
         return {x: -1, y: 0}   
         case 'btt':
-        return {x: 0, y: 1}   
+        return {x: 0, y: -1}   
         case 'ltr':
         return {x: 1, y: 0}     
         default:
