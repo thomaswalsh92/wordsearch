@@ -47,19 +47,7 @@ let BoardState = class {
         // Init board method can now place random letters instead of spaces
         // by uncommenting below line. 
     initBoard () {
-        return [
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null],
-            [null, null, null, null, null, null, null, null, null, null]
-        ]
-        /* let board = []
+        let board = []
         for (let i = 0; i < boardSize; i++) {
             board.push([])
             for (let j = 0; j < boardSize; j++) {
@@ -67,13 +55,26 @@ let BoardState = class {
                 board[i].push (' ')
             }
         }
-        return board */
+        return board 
     }
 
   
         // placeWord can now place words in the words object based on their randomly generated
         // start position and direction. One draw back of the method at the moment is that when
-        // it encouters a word conflict it will overwrite words. 
+        // it encouters a word conflict it will overwrite words.
+        
+        // the issue is that words are starting at their end point
+        // somehow they are printing backwards?? 
+        // also the word is starting at one Y position higher
+        // than it should be. Needs to be resolved. 
+
+        // the entire code may be refactored to run
+        // --> X 
+        //  ||
+        //  ||
+        //  \/  Y
+
+
     placeWords (params) {
         let board = params.state.board
         let words = params.words
@@ -113,7 +114,7 @@ function addWords (state, words) {
     let newBoard = new BoardState ('placeWords', {state: state, words: words})
     return newBoard
 }
-
+    
 function printStateToDom (state) {
     let board = document.getElementsByClassName("word-board-container")
     for (let i = 0; i < boardSize; i++) {
@@ -123,7 +124,6 @@ function printStateToDom (state) {
             let y = x.children[j]
             let thisLetter = state.board[i][revCount]
             y.innerText = thisLetter
-            //y.innerText = (i + ',' + revCount)
         }
     }
 }
