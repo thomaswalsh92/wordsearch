@@ -100,12 +100,11 @@ function createWords (arr) {
     let result = []
     for (let i = 0; i < arr.length; i++) {
         let thisWord = new Word(arr[i])
-        if (!clearBoardEdges(thisWord)) {
+        if (!clearBoardEdges(thisWord)) /* || !clearOtherWords(thisWord, result)) */ {
             i --
-        } else if (clearBoardEdges(thisWord)) {
-            result.push(thisWord)
         } 
-
+        result.push(thisWord)
+    
     }
     return result
 } 
@@ -176,7 +175,34 @@ function clearBoardEdges (word) {
             throw new Error ('There was an issue with clearBoardEdges')
     }
 }
-    //
+
+    // 
+function clearOtherWords (word, array) {
+    console.log (word.coordinates)
+    for (let i = 0; i < word.coordinates.length; i++) {
+        let thisWordCoord = word.coordinates[i]
+        console.log ('thisWordCoord is ', thisWordCoord)
+        for (let j = 0; j < array.length; j++) {
+            let arrWord = array[j]
+            console.log ('arrWord is ', arrWord)
+            for (let k = 0; k < arrWord.coordinates.length; k++) {
+                let arrWordCoord = arrWord.coordinates[k]
+                console.log ('arrWordCoord is ', arrWordCoord)
+                if ((thisWordCoord.x === arrWordCoord.x) || (thisWordCoord.y === arrWordCoord.y)) {
+                    return false
+                }
+
+            }
+        }
+    }
+    return true 
+
+
+// I is the coordinate in the word being checked
+// J should be the words in the array so far
+// K should be the coordinate in these words
+
+}
 
     //when provided a word, this returns an object which provides
     //the amount to change co-ordinates by per iteration to allow printing
