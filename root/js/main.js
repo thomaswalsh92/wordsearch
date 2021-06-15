@@ -13,6 +13,7 @@ let Word = class {
         this.direction = Word.randomDirection();
         this.text = word.toUpperCase();
         this.startPos = randomBoardSquare();
+        this.coordinates = this.createCoordinates();
     }
 
     static randomDirection () {
@@ -28,6 +29,20 @@ let Word = class {
             return "ltr"
         }
     }
+
+    createCoordinates () {
+        let result = []
+        let printDir = getPrintDirection(this)
+        let startPos = this.startPos
+        let coord = {x: startPos.x, y: startPos.y}
+        for (let i = 0; i < this.text.length; i++) {
+            result.push ({x: coord.x, y: coord.y})
+            coord.x = coord.x + printDir.x
+            coord.y = coord.y + printDir.y
+        }
+        return result
+    } 
+
 }
 
     // BoardState class and associated methods are used only to generate new states board state objects. 
@@ -61,20 +76,15 @@ let BoardState = class {
     placeWords (params) {
         let board = params.state.board
         let words = params.words
-        //console.log (`1: words is:`, words[0], words[1], words[2], words[3], words[4])
         for (let i = 0; i < words.length; i++) {
-            //console.log (`2: the word start pos is: ${words[i].startPos.x}, ${words[i].startPos.y}`)
             let thisWord = words[i]    
             let startPos = thisWord.startPos
-            let coOrd = {x: startPos.x, y: startPos.y}
-             //console.log (`3: the coOrd var is ${coOrd.x}, ${coOrd.y} `)
-             //console.log (`3: the word start pos is: ${thisWord.startPos.x}, ${thisWord.startPos.y}`)
+            let coord = {x: startPos.x, y: startPos.y}
             let printDir = getPrintDirection(thisWord)
             for (let j = 0; j < thisWord.text.length; j++) {
-                //console.log (`printing word: ${thisWord.text}, letter: ${thisWord.text[j]} at co-ords: ${coOrd.x}, ${coOrd.y} (direction is ${thisWord.direction})`)
-                board[coOrd.x][coOrd.y] = thisWord.text[j]
-                coOrd.x = coOrd.x + printDir.x
-                coOrd.y = coOrd.y + printDir.y
+                board[coord.x][coord.y] = thisWord.text[j]
+                coord.x = coord.x + printDir.x
+                coord.y = coord.y + printDir.y
             }
         }
         return board
@@ -95,11 +105,12 @@ function createWords (arr) {
         } else if (clearBoardEdges(thisWord)) {
             result.push(thisWord)
         } 
+
     }
     return result
 } 
     // adds a words object created in createWords to create a new board state
-function addWords (state, words) {
+function addWordsToBoard (state, words) {
     let newBoard = new BoardState ('placeWords', {state: state, words: words})
     return newBoard
 }
@@ -165,6 +176,7 @@ function clearBoardEdges (word) {
             throw new Error ('There was an issue with clearBoardEdges')
     }
 }
+    //
 
     //when provided a word, this returns an object which provides
     //the amount to change co-ordinates by per iteration to allow printing
@@ -185,12 +197,12 @@ function getPrintDirection (word) {
 }
 
 
-
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 let words = createWords(wordNames)
 console.log ('inital value of words is: ', words)
 let init = new BoardState('init')
-let wordsAdded = addWords(init, words)
+let wordsAdded = addWordsToBoard(init, words)
 printStateToDom (wordsAdded)
+console.log (wordsAdded)
 
