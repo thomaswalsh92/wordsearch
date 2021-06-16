@@ -100,11 +100,15 @@ function createWords (arr) {
     let result = []
     for (let i = 0; i < arr.length; i++) {
         let thisWord = new Word(arr[i])
-        if (!clearBoardEdges(thisWord)) /* || !clearOtherWords(thisWord, result)) */ {
+        if ((!clearBoardEdges(thisWord))) {
             i --
-        } 
-        result.push(thisWord)
-    
+            console.log ('board edges fail')
+        } else if ((!clearOtherWords(thisWord, result))) {
+            i --
+            console.log ('other words fail')
+        } else {
+            result.push (thisWord)
+        }
     }
     return result
 } 
@@ -176,34 +180,23 @@ function clearBoardEdges (word) {
     }
 }
 
-    // 
+    //returns true as long as a word is not sharing any 
+    //coordinates with another word
 function clearOtherWords (word, array) {
-    console.log (word.coordinates)
-    for (let i = 0; i < word.coordinates.length; i++) {
-        let thisWordCoord = word.coordinates[i]
-        console.log ('thisWordCoord is ', thisWordCoord)
-        for (let j = 0; j < array.length; j++) {
-            let arrWord = array[j]
-            console.log ('arrWord is ', arrWord)
-            for (let k = 0; k < arrWord.coordinates.length; k++) {
-                let arrWordCoord = arrWord.coordinates[k]
-                console.log ('arrWordCoord is ', arrWordCoord)
-                if ((thisWordCoord.x === arrWordCoord.x) || (thisWordCoord.y === arrWordCoord.y)) {
+    for (let j = 0; j < array.length; j++) {
+        let compare = array[j]
+        for (let k = 0; k < word.coordinates.length; k++) {
+            let wordCoord = word.coordinates[k]
+            for (let l = 0; l < compare.coordinates.length; l++) {
+                let compareCoord = compare.coordinates[l]
+                if ((wordCoord.x === compareCoord.x) && (wordCoord.y === compareCoord.y)) {
                     return false
                 }
-
             }
         }
     }
     return true 
-
-
-// I is the coordinate in the word being checked
-// J should be the words in the array so far
-// K should be the coordinate in these words
-
 }
-
     //when provided a word, this returns an object which provides
     //the amount to change co-ordinates by per iteration to allow printing
     //onto the board.
@@ -227,8 +220,11 @@ function getPrintDirection (word) {
     // after async action when API is integrated.
 let words = createWords(wordNames)
 console.log ('inital value of words is: ', words)
+//let pear = new Word ("pear")
+//console.log (pear)
+//console.log(clearOtherWords(pear, words))
 let init = new BoardState('init')
 let wordsAdded = addWordsToBoard(init, words)
 printStateToDom (wordsAdded)
-console.log (wordsAdded)
+
 
