@@ -218,10 +218,6 @@ function getPrintDirection (word) {
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 let words = createWords(wordNames)
-console.log ('inital value of words is: ', words)
-//let pear = new Word ("pear")
-//console.log (pear)
-//console.log(clearOtherWords(pear, words))
 let init = new BoardState('init')
 let wordsAdded = addWordsToBoard(init, words)
 printStateToDom (wordsAdded)
