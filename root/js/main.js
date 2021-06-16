@@ -66,8 +66,8 @@ let BoardState = class {
         for (let i = 0; i < boardSize; i++) {
             board.push([])
             for (let j = 0; j < boardSize; j++) {
-                //board[i].push(randomLetter())
-                board[i].push (' ')
+                board[i].push(randomLetter())
+                //board[i].push (' ')
             }
         }
         return board 
@@ -123,7 +123,6 @@ function printStateToDom (state) {
     for (let i = 0; i < boardSize; i++) {
         let x = board[0].children[i]
         for (let j = 0; j < boardSize; j++) {
-            let revCount = boardSize - (j + 1)
             let y = x.children[j]
             let thisLetter = state.board[i][j]
             y.innerText = thisLetter
