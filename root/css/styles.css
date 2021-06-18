@@ -23,10 +23,16 @@ button {
   text-align: center;
   min-height: 3rem;
   border: none;
+  cursor: pointer;
+  border-radius: 6px;
 }
 
 button p {
   margin: 1rem 1rem;
+}
+
+div {
+  border-radius: 6px;
 }
 
 .container {
@@ -84,13 +90,12 @@ button p {
 .word-board-section table {
   width: 90%;
   max-width: 500px;
-  background-color: #cccccc;
 }
 
 .word-board-section .word-board-container {
   width: 90%;
   max-width: 500px;
-  background-color: #cccccc;
+  background-color: #858484;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[10];
@@ -158,7 +163,7 @@ button p {
 }
 
 .dashboard .widget {
-  background-color: #cccccc;
+  background-color: #f0703d;
   min-height: 3rem;
   word-wrap: break-word;
 }
@@ -192,7 +197,7 @@ button p {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2 / 3;
-  background-color: #E8BF83;
+  background-color: #f38942;
 }
 
 .dashboard #start-new {
@@ -202,11 +207,11 @@ button p {
   -ms-grid-row: 3;
   -ms-grid-row-span: 1;
   grid-row: 3 / 4;
-  background-color: #454545;
+  background-color: #fcaa3f;
 }
 
 .dashboard #start-new p {
-  color: #C8C8C8;
+  color: #000000;
 }
 
 .modal-background {
@@ -248,8 +253,9 @@ button p {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -261,6 +267,7 @@ button p {
 }
 
 .modal-button-section {
+  height: 20%;
   width: 80%;
   font-size: 0.8rem;
   display: -webkit-box;
