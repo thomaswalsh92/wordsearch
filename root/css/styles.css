@@ -174,12 +174,13 @@ p {
   grid-row: 1 / 2;
 }
 
-.dashboard .button {
+.dashboard button {
   text-align: center;
   min-height: 3rem;
+  border: none;
 }
 
-.dashboard .button p {
+.dashboard button p {
   margin: 1rem 1rem;
 }
 

@@ -128,12 +128,13 @@ p {
         grid-row: 1 / 2;
     }
 
-    .button {
+    button {
         text-align: center;
         min-height: 3rem;
         p {
             margin: 1rem 1rem;
         }
+        border: none;
     }
 
     #enter-word {
