@@ -129,6 +129,7 @@ function printStateToDom (state) {
     }
 }
 
+
 //UTILITY FUNCTIONS > 
 
     //used to find a random co-ordinate on the board
@@ -218,12 +219,20 @@ function getPrintDirection (word) {
     // after async action when API is integrated.
 
 function run () {
+    console.log ('run')
     let words = createWords(wordNames)
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
 }
 
-run();
+// RUN SECTION AND BUTTON BINDINGS
+let startNewGameButton = document.getElementById('start-new')
+startNewGameButton.onclick = function () {
+    run();
+}
+
+
+
 
 
