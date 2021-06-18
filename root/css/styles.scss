@@ -1,5 +1,6 @@
 html {
     font-size: 16;
+    background-color: #a9e4ff
 }
 
 * {
@@ -20,6 +21,7 @@ p {
 }
 
 button {
+    background-color: #d6d6d6;
     text-align: center;
     min-height: 3rem;
     p {
@@ -28,14 +30,13 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 6px;   
+
 }
 
-button:hover{
-    background-color: #a8a8a8;
-}
 
 div {
     border-radius: 6px;
+    opacity: 95%;
 }
 
 .container { 
@@ -79,11 +80,10 @@ div {
         max-width: 500px;
     }
 
-
     .word-board-container {
         width: 90%;
         max-width: 500px;
-        background-color: #a8a8a8;
+        background-color: #ffffff;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
         justify-content: center;
@@ -128,15 +128,17 @@ div {
 
     p {
         font-size: 0.8rem;
+        margin: 0;
     }
 
     .widget {
-        background-color: #f0703d;
+        background-color: #fc9534;
         min-height: 3rem;
         word-wrap: break-word;
         p {
             margin: 1rem 1rem;
         }
+
     }
 
     #timer {
@@ -149,22 +151,22 @@ div {
         grid-row: 1 / 2;
     }
 
-    
-
     #enter-word {
         grid-column: 1 / 22;
         grid-row: 2 / 3;
-        background-color: #f38942;
+        //background-color: #f38942;
     }
 
     #start-new {
         grid-column: 1 / 22;
         grid-row: 3 / 4;
-        background-color: #fcaa3f;
-        p {
-            color: #000000;
-        }
+        //background-color: #fcaa3f;   
     }   
+
+    button:hover {
+        background-color: #a8a8a8;;
+    }
+
 }
 
 
@@ -186,7 +188,9 @@ div {
 .modal-background-active {
     visibility: visible;
     opacity: 1;
+    border-radius: 0;
 }
+
 
 .modal {
     background-color: white;
@@ -198,9 +202,14 @@ div {
     justify-content: center;
     align-items: center;
     text-align: center;
-
+    
     p {
         margin: 1rem 1.2rem 1rem 1.2rem;
+        opacity: 100%;
+    }
+    
+    button:hover {
+        background-color: #a8a8a8;;
     }
 }
 
@@ -218,3 +227,4 @@ div {
     }
 
 }
+

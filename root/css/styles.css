@@ -1,5 +1,6 @@
 html {
   font-size: 16;
+  background-color: #a9e4ff;
 }
 
 * {
@@ -20,6 +21,7 @@ p {
 }
 
 button {
+  background-color: #d6d6d6;
   text-align: center;
   min-height: 3rem;
   border: none;
@@ -31,12 +33,9 @@ button p {
   margin: 1rem 1rem;
 }
 
-button:hover {
-  background-color: #a8a8a8;
-}
-
 div {
   border-radius: 6px;
+  opacity: 95%;
 }
 
 .container {
@@ -99,7 +98,7 @@ div {
 .word-board-section .word-board-container {
   width: 90%;
   max-width: 500px;
-  background-color: #a8a8a8;
+  background-color: #ffffff;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[10];
@@ -164,10 +163,11 @@ div {
 
 .dashboard p {
   font-size: 0.8rem;
+  margin: 0;
 }
 
 .dashboard .widget {
-  background-color: #f0703d;
+  background-color: #fc9534;
   min-height: 3rem;
   word-wrap: break-word;
 }
@@ -201,7 +201,6 @@ div {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2 / 3;
-  background-color: #f38942;
 }
 
 .dashboard #start-new {
@@ -211,11 +210,10 @@ div {
   -ms-grid-row: 3;
   -ms-grid-row-span: 1;
   grid-row: 3 / 4;
-  background-color: #fcaa3f;
 }
 
-.dashboard #start-new p {
-  color: #000000;
+.dashboard button:hover {
+  background-color: #a8a8a8;
 }
 
 .modal-background {
@@ -243,6 +241,7 @@ div {
 .modal-background-active {
   visibility: visible;
   opacity: 1;
+  border-radius: 0;
 }
 
 .modal {
@@ -268,6 +267,11 @@ div {
 
 .modal p {
   margin: 1rem 1.2rem 1rem 1.2rem;
+  opacity: 100%;
+}
+
+.modal button:hover {
+  background-color: #a8a8a8;
 }
 
 .modal-button-section {
