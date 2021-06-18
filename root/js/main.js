@@ -227,12 +227,16 @@ function run () {
 }
 
 // RUN SECTION AND BUTTON BINDINGS
+
+let body = document.querySelector('body')
+body.onload = function () {
+    run();
+}
+
 let startNewGameButton = document.getElementById('start-new')
 startNewGameButton.onclick = function () {
     run();
 }
-
-
 
 
 
