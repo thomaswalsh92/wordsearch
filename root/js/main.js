@@ -6,7 +6,6 @@ let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
 // ! UI also needs to be redesigned to account for anything other than a 10 x 10 grid ! 
 let boardSize = 10;
 
-
 //CLASS CONSTRUCTORS 
 let Word = class {
     constructor (word) {
@@ -217,9 +216,14 @@ function getPrintDirection (word) {
 
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
-let words = createWords(wordNames)
-let init = new BoardState('init')
-let wordsAdded = addWordsToBoard(init, words)
-printStateToDom (wordsAdded)
+
+function run () {
+    let words = createWords(wordNames)
+    let init = new BoardState('init')
+    let wordsAdded = addWordsToBoard(init, words)
+    printStateToDom (wordsAdded)
+}
+
+run();
 
 
