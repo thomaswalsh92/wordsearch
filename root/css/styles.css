@@ -117,7 +117,8 @@ p {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 2rem;
+  height: 1.8rem;
+  margin: 0.3rem 0;
 }
 
 .word-board-section .word-board-container p {

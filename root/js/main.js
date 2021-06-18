@@ -238,5 +238,3 @@ startNewGameButton.onclick = function () {
     run();
 }
 
-
-
