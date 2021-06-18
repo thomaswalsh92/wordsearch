@@ -27,7 +27,11 @@ button {
     }
     border: none;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 6px;   
+}
+
+button:hover{
+    background-color: #a8a8a8;
 }
 
 div {
@@ -79,7 +83,7 @@ div {
     .word-board-container {
         width: 90%;
         max-width: 500px;
-        background-color: #858484;
+        background-color: #a8a8a8;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
         justify-content: center;
@@ -212,4 +216,5 @@ div {
         height: 100%;
         width: 45%
     }
+
 }

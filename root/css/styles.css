@@ -31,6 +31,10 @@ button p {
   margin: 1rem 1rem;
 }
 
+button:hover {
+  background-color: #a8a8a8;
+}
+
 div {
   border-radius: 6px;
 }
@@ -95,7 +99,7 @@ div {
 .word-board-section .word-board-container {
   width: 90%;
   max-width: 500px;
-  background-color: #858484;
+  background-color: #a8a8a8;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[10];
