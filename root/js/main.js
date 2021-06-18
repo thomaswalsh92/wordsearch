@@ -235,6 +235,16 @@ body.onload = function () {
 
 let startNewGameButton = document.getElementById('start-new')
 startNewGameButton.onclick = function () {
-    run();
+    let modalBg = document.querySelector('.modal-background')
+    modalBg.classList.add('modal-background-active')
+    let modalYes = document.querySelector('#start-new-yes')
+    modalYes.onclick = function () {
+        modalBg.classList.remove('modal-background-active')
+        run()
+    }
+    let modalCancel = document.querySelector('#start-new-cancel')
+    modalCancel.onclick = function () {
+        modalBg.classList.remove('modal-background-active')
+    }   
 }
 
