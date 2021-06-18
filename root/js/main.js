@@ -1,8 +1,8 @@
 //GLOBAL VARS
 
+//stubbed word names
 let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
 // ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE ! 
-// ! Will be refactored later ! 
 // ! UI also needs to be redesigned to account for anything other than a 10 x 10 grid ! 
 let boardSize = 10;
 
