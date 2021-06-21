@@ -89,8 +89,37 @@ let BoardState = class {
         return board
     }
 }
-    
-
+   
+function timer () {
+    let timerText = document.querySelector ('#timer p')
+    let counter = 0;
+    let secs = 0;
+    let mins = 0;
+    let hours = 0; 
+    function leadingZero (value) {
+        if (value < 10) {
+            return `0${value}`
+        } else {
+            return value
+        }
+    }
+    function tick () {
+        if (counter < 60) {
+        secs = counter 
+        counter ++
+        } else {
+            counter = 0
+            mins ++
+        }
+        if (mins >= 60) {
+            hours ++ 
+            mins = 0
+        }
+        timerText.innerText = `Timer: ${leadingZero(hours)}:${leadingZero(mins)}:${leadingZero(secs)}`
+    }
+    let timer = setInterval (tick, 1000)
+    return timer
+}
 
 //MAIN FUNCTIONS - these are used for general program actions e.g. creating /processing word data. 
 
@@ -224,6 +253,7 @@ function run () {
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
+    timer ()
 }
 
 // RUN SECTION AND BUTTON BINDINGS
