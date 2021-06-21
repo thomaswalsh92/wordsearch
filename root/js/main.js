@@ -5,6 +5,7 @@ let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
 // ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE ! 
 // ! UI also needs to be redesigned to account for anything other than a 10 x 10 grid ! 
 let boardSize = 10;
+let timerHandle = 0;
 
 //CLASS CONSTRUCTORS 
 let Word = class {
@@ -89,40 +90,8 @@ let BoardState = class {
         return board
     }
 }
-   
-function timer () {
-    let timerText = document.querySelector ('#timer p')
-    let counter = 0;
-    let secs = 0;
-    let mins = 0;
-    let hours = 0; 
-    function leadingZero (value) {
-        if (value < 10) {
-            return `0${value}`
-        } else {
-            return value
-        }
-    }
-    function tick () {
-        if (counter < 60) {
-        secs = counter 
-        counter ++
-        } else {
-            counter = 0
-            mins ++
-        }
-        if (mins >= 60) {
-            hours ++ 
-            mins = 0
-        }
-        timerText.innerText = `Timer: ${leadingZero(hours)}:${leadingZero(mins)}:${leadingZero(secs)}`
-    }
-    let timer = setInterval (tick, 1000)
-    return timer
-}
 
 //MAIN FUNCTIONS - these are used for general program actions e.g. creating /processing word data. 
-
     // uses an array to create a set of words.
 function createWords (arr) {
     let result = []
@@ -158,6 +127,45 @@ function printStateToDom (state) {
     }
 }
 
+function timer () {
+    let timerText = document.querySelector ('#timer p')
+    function timerGo () {
+        let counter = 0;
+        let secs = 0;
+        let mins = 0;
+        let hours = 0; 
+        function leadingZero (value) {
+            if (value < 10) {
+                return `0${value}`
+            } else {
+                return value
+            }
+        }
+        function tick () {
+            if (counter < 60) {
+            secs = counter 
+            counter ++
+            } else {
+                counter = 0
+                mins ++
+            }
+            if (mins >= 60) {
+                hours ++ 
+                mins = 0
+            }
+            timerText.innerText = `Timer: ${leadingZero(hours)}:${leadingZero(mins)}:${leadingZero(secs)}`
+        }
+        timerHandle = setInterval (tick, 1000)
+    }
+    if (timerHandle == 0) {
+        timerGo()
+
+    } else {
+        clearInterval(timerHandle) 
+        let timerText = 'Timer: 00:00:00'
+        timerGo ()
+    }
+}
 
 //UTILITY FUNCTIONS > 
 
@@ -247,20 +255,22 @@ function getPrintDirection (word) {
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 
+
+
 function run () {
     console.log ('run')
     let words = createWords(wordNames)
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
-    timer ()
+    timer()
 }
 
 // RUN SECTION AND BUTTON BINDINGS
 
 let body = document.querySelector('body')
 body.onload = function () {
-    run();
+    run ()
 }
 
 let startNewGameButton = document.getElementById('start-new')
@@ -277,4 +287,5 @@ startNewGameButton.onclick = function () {
         modalBg.classList.remove('modal-background-active')
     }   
 }
+
 
