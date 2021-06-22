@@ -126,6 +126,7 @@ function printStateToDom (state) {
             let y = x.children[j]
             let thisLetter = state.board[i][j]
             y.innerText = thisLetter
+            y.style.color = 'black'
         }
     }
 }
@@ -167,6 +168,30 @@ function timer () {
         clearInterval(timerHandle) 
         let timerText = 'Timer: 00:00:00'
         timerGo ()
+    }
+}
+
+    // takes the word that has been found and removes from the words array.
+    // this function should also highlight the word on the board and update
+    // the words left widget
+function solveWord (i) {
+    highlightWord(words[i])
+    let wordsLeft = document.querySelector('#words-left p')
+    console.log (wordsLeft)
+    words.splice(i, 1)
+    wordsLeft.innerText = `Words left: ${words.length}`
+    console.log (words)
+}
+
+    //takes the word going through solve word and highlights it on the
+    // word board.
+
+function highlightWord (word) {
+    for (let i = 0; i < word.coordinates.length; i++) {
+        let board = document.getElementsByClassName("word-board-container")
+        let x = board[0].children[word.coordinates[i].x]
+        let y = x.children[word.coordinates[i].y]
+        y.style.color = 'orange'
     }
 }
 
@@ -258,6 +283,7 @@ function getPrintDirection (word) {
 function matchesWord (word, words) {
     for (let i = 0; i < words.length; i++) {
         if (word.toUpperCase() === words[i].text) {
+            solveWord(i)
             return true
         } 
     }
@@ -275,7 +301,11 @@ function run () {
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
+    let timerText = document.querySelector('#timer p')
+    timerText.innerText = 'Timer: 00:00:00'
     timer()
+    let wordsLeft = document.querySelector('#words-left p')
+    wordsLeft.innerText = 'Words left: 5'
 }
 
 

@@ -189,7 +189,7 @@ input {
   grid-row: 1 / 2;
 }
 
-.dashboard #word-left {
+.dashboard #words-left {
   -ms-grid-column: 12;
   -ms-grid-column-span: 10;
   grid-column: 12 / 22;
