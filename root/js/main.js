@@ -266,16 +266,27 @@ function run () {
     timer()
 }
 
-// RUN SECTION AND BUTTON BINDINGS
+// RUN SECTION AND BUTTON/MODAL BINDINGS
 
 let body = document.querySelector('body')
 body.onload = function () {
     run ()
 }
 
+let enterWordButton = document.getElementById('enter-word')
+enterWordButton.onclick = function () {
+    let modalBg = document.querySelector('.enter-word-modal-background')
+    modalBg.classList.add('modal-background-active')
+
+    let modalCancel = document.querySelector('#enter-word-cancel')
+    modalCancel.onclick = function () {
+        modalBg.classList.remove('modal-background-active')
+    }   
+}
+
 let startNewGameButton = document.getElementById('start-new')
 startNewGameButton.onclick = function () {
-    let modalBg = document.querySelector('.modal-background')
+    let modalBg = document.querySelector('.start-new-modal-background')
     modalBg.classList.add('modal-background-active')
     let modalYes = document.querySelector('#start-new-yes')
     modalYes.onclick = function () {
@@ -287,5 +298,6 @@ startNewGameButton.onclick = function () {
         modalBg.classList.remove('modal-background-active')
     }   
 }
+
 
 

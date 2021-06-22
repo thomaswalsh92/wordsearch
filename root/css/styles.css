@@ -21,7 +21,7 @@ p {
 }
 
 button {
-  background-color: #d6d6d6;
+  background-color: #cacaca;
   text-align: center;
   min-height: 3rem;
   border: none;
@@ -35,6 +35,11 @@ button p {
 
 div {
   border-radius: 6px;
+}
+
+input {
+  border-radius: 4px;
+  color: #cacaca;
 }
 
 .container {
@@ -215,7 +220,29 @@ div {
   background-color: #a8a8a8;
 }
 
-.modal-background {
+.start-new-modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s, opacity 0.5s;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.enter-word-modal-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -271,6 +298,14 @@ div {
 
 .modal button:hover {
   background-color: #a8a8a8;
+}
+
+.modal input {
+  margin: 1rem;
+  margin-bottom: 2rem;
+  width: 80%;
+  color: #6b6b6b;
+  text-align: center;
 }
 
 .modal-button-section {

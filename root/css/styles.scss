@@ -21,7 +21,7 @@ p {
 }
 
 button {
-    background-color: #d6d6d6;
+    background-color: #cacaca;
     text-align: center;
     min-height: 3rem;
     p {
@@ -36,6 +36,11 @@ button {
 
 div {
     border-radius: 6px;
+}
+
+input {
+    border-radius: 4px;
+    color: #cacaca
 }
 
 .container { 
@@ -169,7 +174,22 @@ div {
 }
 
 
-.modal-background {
+.start-new-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+}
+
+.enter-word-modal-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -192,6 +212,7 @@ div {
 
 
 .modal {
+    //visibility: hidden;
     background-color: white;
     width: 40%;
     height: 25%;
@@ -210,7 +231,17 @@ div {
     button:hover {
         background-color: #a8a8a8;;
     }
+
+    input {
+        margin: 1rem;
+        margin-bottom: 2rem;
+        width: 80%;
+        color: rgb(107, 107, 107);
+        text-align: center;
+    
+    }
 }
+
 
 .modal-button-section {
     height: 20%;
