@@ -2,6 +2,9 @@
 
 //stubbed word names
 let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
+//below variable will become the array of word objects when run takes place. 
+//must be global as it is accessed by the enter word functionality.
+let words 
 // ! DO NOT CHANGE BOARD SIZE, AS WILL CAUSE CONFLICT WITH EXISTING OBJECT STRUCTURE ! 
 // ! UI also needs to be redesigned to account for anything other than a 10 x 10 grid ! 
 let boardSize = 10;
@@ -99,10 +102,10 @@ function createWords (arr) {
         let thisWord = new Word(arr[i])
         if ((!clearBoardEdges(thisWord))) {
             i --
-            console.log ('board edges fail')
+            //console.log ('board edges fail')
         } else if ((!clearOtherWords(thisWord, result))) {
             i --
-            console.log ('other words fail')
+            //console.log ('other words fail')
         } else {
             result.push (thisWord)
         }
@@ -250,7 +253,16 @@ function getPrintDirection (word) {
         throw new Error ('There was an issue with getPrintDirection')
     }
 }
-
+    //when provided a word, compares to an array of words and returns true
+    //if there are any matches.
+function matchesWord (word, words) {
+    for (let i = 0; i < words.length; i++) {
+        if (word.toUpperCase() === words[i].text) {
+            return true
+        } 
+    }
+    return false
+}
 
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
@@ -258,13 +270,15 @@ function getPrintDirection (word) {
 
 
 function run () {
-    console.log ('run')
-    let words = createWords(wordNames)
+    //console.log ('run')
+    words = createWords(wordNames)
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
     timer()
 }
+
+
 
 // RUN SECTION AND BUTTON/MODAL BINDINGS
 
@@ -277,6 +291,20 @@ let enterWordButton = document.getElementById('enter-word')
 enterWordButton.onclick = function () {
     let modalBg = document.querySelector('.enter-word-modal-background')
     modalBg.classList.add('modal-background-active')
+    let modalInput = document.querySelector('#enter-word-input')
+    let modalError = document.querySelector('.modal-error-section')
+    let modalConfirm = document.querySelector('#enter-word-confirm')
+    modalConfirm.onclick = function () {
+        if (modalInput.value === '') {
+            modalError.innerText = 'Please enter a word'
+        }
+        else if (matchesWord (modalInput.value, words) === false) {
+            modalError.innerText = 'Word not found'
+
+        } else {
+            modalError.innerText = 'Word found!'
+        }
+    }
 
     let modalCancel = document.querySelector('#enter-word-cancel')
     modalCancel.onclick = function () {
@@ -298,6 +326,5 @@ startNewGameButton.onclick = function () {
         modalBg.classList.remove('modal-background-active')
     }   
 }
-
 
 

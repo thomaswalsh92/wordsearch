@@ -325,4 +325,9 @@ input {
   height: 100%;
   width: 45%;
 }
+
+.modal-error-section {
+  font-size: 0.8rem;
+  color: red;
+}
 /*# sourceMappingURL=styles.css.map */
