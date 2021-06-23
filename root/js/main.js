@@ -1,7 +1,18 @@
 //GLOBAL VARS
 
 //stubbed word names
-let wordNames = ['orange', 'banana', 'apricot', 'kiwi', 'peach'];
+let wordNames = 
+[['orange', 'banana', 'apricot', 'kiwi', 'peach'],
+['blue','red','orange','cyan','magenta'],
+['car','boat','bicycle','jetpack','rocket'],
+['lion', 'ostrich', 'bear', 'fish', 'mouse'],
+['brocolli', 'turnip', 'carrot', 'onion', 'garlic'],
+['golf', 'football', 'hockey', 'swimming', 'rowing'],
+['dog', 'cat', 'hamster', 'goldfish', 'parrot'],
+['rhino', 'giraffe', 'zebra', 'spider', 'monkey'],
+['plane', 'train', 'bus', 'ferry', 'tram']
+['gold', 'silver', 'platinum', 'iron', 'lead']
+];
 //below variable will become the array of word objects when run takes place. 
 //must be global as it is accessed by the enter word functionality.
 let words 
@@ -300,6 +311,10 @@ function matchesWord (word, words) {
     return false
 }
 
+function randomNum (range) {
+    return Math.floor(Math.random() * range)
+}
+
     // RUN --> this will need to be a function that can be triggered
     // after async action when API is integrated.
 
@@ -307,7 +322,8 @@ function matchesWord (word, words) {
 
 function run () {
     //console.log ('run')
-    words = createWords(wordNames)
+    words = createWords(wordNames[randomNum(wordNames.length)])
+    console.log (words)
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
@@ -373,5 +389,4 @@ startNewGameButton.onclick = function () {
         modalBg.classList.remove('modal-background-active')
     }   
 }
-
 
