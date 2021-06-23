@@ -181,6 +181,9 @@ function solveWord (i) {
     words.splice(i, 1)
     wordsLeft.innerText = `Words left: ${words.length}`
     console.log (words)
+    if (words.length < 1) {
+        gameComplete();
+    }
 }
 
     //takes the word going through solve word and highlights it on the
@@ -194,6 +197,15 @@ function highlightWord (word) {
         y.style.color = 'orange'
         y.style.fontWeight = 'bold'
     }
+}
+
+function gameComplete () {
+    console.log ('the game is complete well done!')
+    let modalBg = document.querySelector('.start-new-modal-background');
+    let modalText = document.querySelector('#start-new-modal p')
+    modalText.innerText = 'You found all the words, would you like to play again?'
+    modalBg.classList.add('modal-background-active')
+
 }
 
 //UTILITY FUNCTIONS > 
@@ -323,6 +335,7 @@ enterWordButton.onclick = function () {
     let modalBg = document.querySelector('.enter-word-modal-background')
     modalBg.classList.add('modal-background-active')
     let modalInput = document.querySelector('#enter-word-input')
+    modalInput.focus();
     let modalError = document.querySelector('.modal-error-section')
     let modalConfirm = document.querySelector('#enter-word-confirm')
     modalConfirm.onclick = function () {
@@ -349,6 +362,8 @@ enterWordButton.onclick = function () {
 
 let startNewGameButton = document.getElementById('start-new')
 startNewGameButton.onclick = function () {
+    let modalText = document.querySelector('#start-new-modal p')
+    modalText.innerText = `Starting a new game will reset your current progress. Do you want to continue?`
     let modalBg = document.querySelector('.start-new-modal-background')
     modalBg.classList.add('modal-background-active')
     let modalYes = document.querySelector('#start-new-yes')
