@@ -1,7 +1,7 @@
 //GLOBAL VARS
 
 //stubbed word names
-let wordNames = ['apple', 'banana', 'apricot', 'kiwi', 'peach'];
+let wordNames = ['orange', 'banana', 'apricot', 'kiwi', 'peach'];
 //below variable will become the array of word objects when run takes place. 
 //must be global as it is accessed by the enter word functionality.
 let words 
@@ -192,6 +192,7 @@ function highlightWord (word) {
         let x = board[0].children[word.coordinates[i].x]
         let y = x.children[word.coordinates[i].y]
         y.style.color = 'orange'
+        y.style.fontWeight = 'bold'
     }
 }
 
@@ -332,13 +333,17 @@ enterWordButton.onclick = function () {
             modalError.innerText = 'Word not found'
 
         } else {
-            modalError.innerText = 'Word found!'
+            modalBg.classList.remove('modal-background-active')
+            modalInput.value = ''
+            modalError.innerText = ''
         }
     }
 
     let modalCancel = document.querySelector('#enter-word-cancel')
     modalCancel.onclick = function () {
         modalBg.classList.remove('modal-background-active')
+        modalInput.value = ''
+        modalError.innerText = ''
     }   
 }
 
