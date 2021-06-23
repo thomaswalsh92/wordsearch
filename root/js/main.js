@@ -345,6 +345,7 @@ words = createWords(wordNames[randomNum(wordNames.length)])
 
 
 
+
 // RUN SECTION AND BUTTON/MODAL BINDINGS
 
 let body = document.querySelector('body')
