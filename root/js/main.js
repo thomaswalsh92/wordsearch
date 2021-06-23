@@ -214,6 +214,16 @@ function gameComplete () {
     modalText.innerText = 'You found all the words, would you like to play again?'
     modalBg.classList.add('modal-background-active')
 
+    let modalYes = document.querySelector('#start-new-yes')
+    modalYes.onclick = function () {
+        modalBg.classList.remove('modal-background-active')
+        run()
+    }
+    let modalCancel = document.querySelector('#start-new-cancel')
+    modalCancel.onclick = function () {
+        modalBg.classList.remove('modal-background-active')
+    }   
+
 }
 
 //UTILITY FUNCTIONS > 
@@ -322,8 +332,7 @@ function randomNum (range) {
 
 function run () {
     //console.log ('run')
-    words = createWords(wordNames[randomNum(wordNames.length)])
-    console.log (words)
+words = createWords(wordNames[randomNum(wordNames.length)])
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
@@ -351,7 +360,7 @@ enterWordButton.onclick = function () {
     modalInput.focus();
     let modalError = document.querySelector('.modal-error-section')
     let modalConfirm = document.querySelector('#enter-word-confirm')
-    modalConfirm.onclick = function () {
+    modalConfirm.onclick = function confirmWord () {
         if (modalInput.value === '') {
             modalError.innerText = 'Please enter a word'
         }
