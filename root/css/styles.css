@@ -264,6 +264,11 @@ input {
   transition: visibility 0s, opacity 0.5s;
 }
 
+#start-new-modal p {
+  margin-bottom: 2rem;
+  max-width: 80%;
+}
+
 .modal-background-active {
   visibility: visible;
   opacity: 1;
@@ -301,8 +306,10 @@ input {
 }
 
 .modal input {
-  margin: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
   width: 80%;
   color: #6b6b6b;
   text-align: center;

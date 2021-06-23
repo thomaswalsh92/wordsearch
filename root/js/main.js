@@ -177,10 +177,8 @@ function timer () {
 function solveWord (i) {
     highlightWord(words[i])
     let wordsLeft = document.querySelector('#words-left p')
-    console.log (wordsLeft)
     words.splice(i, 1)
     wordsLeft.innerText = `Words left: ${words.length}`
-    console.log (words)
     if (words.length < 1) {
         gameComplete();
     }
@@ -200,7 +198,6 @@ function highlightWord (word) {
 }
 
 function gameComplete () {
-    console.log ('the game is complete well done!')
     let modalBg = document.querySelector('.start-new-modal-background');
     let modalText = document.querySelector('#start-new-modal p')
     modalText.innerText = 'You found all the words, would you like to play again?'
