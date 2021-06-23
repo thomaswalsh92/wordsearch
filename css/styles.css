@@ -53,6 +53,7 @@ input {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 100%;
 }
 
 .header {
@@ -290,6 +291,7 @@ input {
   background-color: white;
   width: 40%;
   height: 25%;
+  min-height: 250px;
   border-radius: 6px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -361,7 +363,10 @@ input {
 }
 
 @media screen and (max-device-width: 400px) {
-  html {
+  html, body {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
     min-width: 400px;
   }
   .modal-button-section {

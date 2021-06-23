@@ -137,7 +137,8 @@ function printStateToDom (state) {
             let y = x.children[j]
             let thisLetter = state.board[i][j]
             y.innerText = thisLetter
-            y.style.color = 'black'
+            y.style.color = '#616161'
+            y.style.fontWeight = ''
         }
     }
 }
@@ -203,7 +204,7 @@ function highlightWord (word) {
         let board = document.getElementsByClassName("word-board-container")
         let x = board[0].children[word.coordinates[i].x]
         let y = x.children[word.coordinates[i].y]
-        y.style.color = 'orange'
+        y.style.color = 'black'
         y.style.fontWeight = 'bold'
     }
 }
@@ -332,7 +333,7 @@ function randomNum (range) {
 
 function run () {
     //console.log ('run')
-words = createWords(wordNames[randomNum(wordNames.length)])
+words = createWords(wordNames[0])//randomNum(wordNames.length)
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
