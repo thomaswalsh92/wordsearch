@@ -30,6 +30,7 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 6px;   
+    margin-bottom: 1rem;
 
 }
 
@@ -134,7 +135,6 @@ input {
     display: grid;
     grid-template-columns: repeat(21, 1fr);
     grid-template-rows: repeat(3, minmax(32px, auto));
-    gap: 1rem;
 
     p {
         font-size: 0.8rem;
@@ -148,6 +148,7 @@ input {
         p {
             margin: 1rem 1rem;
         }
+        margin-bottom: 1rem;
         //border: solid 2px rgb(201, 201, 201);
 
     }
@@ -297,7 +298,7 @@ and (max-device-width: 400px) {
         margin-left: auto;
         margin-right: auto;
         padding: 0;
-        min-width: 400px;
+        //min-width: 400px;
     }
     
     .modal-button-section {
@@ -316,6 +317,14 @@ and (max-device-width: 400px) {
             margin-right: auto;
             margin-bottom: 1rem;
             width: 80%
+        }
+    }
+
+    .word-board-section {
+        .word-board-container {
+            .x {
+            width: 1rem;
+            }
         }
     }
 }

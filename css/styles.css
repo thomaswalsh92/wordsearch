@@ -27,6 +27,7 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 6px;
+  margin-bottom: 1rem;
 }
 
 button p {
@@ -174,7 +175,6 @@ input {
       grid-template-columns: repeat(21, 1fr);
   -ms-grid-rows: (minmax(32px, auto))[3];
       grid-template-rows: repeat(3, minmax(32px, auto));
-  gap: 1rem;
 }
 
 .dashboard p {
@@ -186,6 +186,7 @@ input {
   background-color: #fc9534;
   min-height: 3rem;
   word-wrap: break-word;
+  margin-bottom: 1rem;
 }
 
 .dashboard .widget p {
@@ -367,7 +368,6 @@ input {
     margin-left: auto;
     margin-right: auto;
     padding: 0;
-    min-width: 400px;
   }
   .modal-button-section {
     -webkit-box-orient: vertical;
@@ -387,6 +387,9 @@ input {
     margin-right: auto;
     margin-bottom: 1rem;
     width: 80%;
+  }
+  .word-board-section .word-board-container .x {
+    width: 1rem;
   }
 }
 /*# sourceMappingURL=styles.css.map */
