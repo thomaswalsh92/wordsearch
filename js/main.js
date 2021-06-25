@@ -333,7 +333,7 @@ function randomNum (range) {
 
 function run () {
     //console.log ('run')
-words = createWords(wordNames[0])//randomNum(wordNames.length)
+words = createWords(wordNames[randomNum(wordNames.length)])
     let init = new BoardState('init')
     let wordsAdded = addWordsToBoard(init, words)
     printStateToDom (wordsAdded)
